@@ -1,0 +1,61 @@
+﻿<Controls:MetroWindow x:Class="BalanceKeeper.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:local="clr-namespace:BalanceKeeper"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        ShowTitleBar="True"
+        SaveWindowPosition="True"
+        Icon="square150x150logo_scale_200_XGm_icon.ico"
+        ShowIconOnTitleBar="True"
+        GlowBrush="Black"
+        mc:Ignorable="d"
+        Title="BalanceKeeper" Height="350" Width="525">
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <Controls:WindowCommandsItem>
+                <Button Command="{Binding ShowAccountCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <Grid Margin="4">
+                            <iconPacks:Material Kind="Account" />
+                        </Grid>
+                        <Label Content="Account" Foreground="White"/>
+                    </StackPanel>
+                </Button>
+            </Controls:WindowCommandsItem>
+        <!--    <Controls:WindowCommandsItem>
+                <Button >
+                    <StackPanel Orientation="Horizontal">
+                        <Grid Margin="4">
+                            <iconPacks:Material Kind="Settings"/>
+                        </Grid>
+                        <Label Content="Instellingen" Foreground="White"/>
+                    </StackPanel>
+                </Button>
+            </Controls:WindowCommandsItem>-->
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
+    <Controls:MetroWindow.IconTemplate>
+        <DataTemplate>
+            <iconPacks:PackIconModern Width="{TemplateBinding Width}"
+                                      Height="{TemplateBinding Height}"
+                                      Margin="4"
+                                      Foreground="{DynamicResource IdealForegroundColorBrush}"
+                                      Kind="Money" />
+        </DataTemplate>
+    </Controls:MetroWindow.IconTemplate>
+    <Controls:MetroTabControl 
+            ItemsSource="{Binding MenuItems}" 
+            SelectedItem="{Binding SelectedMenuItem}"
+            DisplayMemberPath="Title">
+
+        <Controls:MetroTabControl.ContentTemplate>
+            <DataTemplate>
+                <ContentPresenter Content="{Binding View}"/>
+            </DataTemplate>
+        </Controls:MetroTabControl.ContentTemplate>
+
+    </Controls:MetroTabControl>
+</Controls:MetroWindow>

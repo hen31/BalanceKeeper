@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="BalanceKeeper.Views.ChildViews.ImportWizard.AdvancedBankImport"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BalanceKeeper.Views.ChildViews.ImportWizard"
+             xmlns:xceed="http://schemas.xceed.com/wpf/xaml/toolkit"
+                              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Label Content="Splitingsteken"/>
+        <TextBox Grid.Column="1" Width="30" HorizontalAlignment="Left" Text="{Binding Seperator}"/>
+
+        <Label Content="Heeft kolomnamen als eerste rij" Grid.Row="1"/>
+        <CheckBox  Grid.Row="1" Grid.Column="1" Width="30" HorizontalAlignment="Left" IsChecked="{Binding HasHeaders}"/>
+
+        <Label FontWeight="Bold" Grid.Row="2" Grid.ColumnSpan="2" Content="Kolommen van waardes, eerste kolom is 1, 0 is niet aanwezig in bestand"/>
+        <Label Content="Datumkolom" Grid.Row="3"/>
+        <Controls:NumericUpDown Minimum="0"  Value="{Binding ColumnDate}"  Grid.Row="3" Grid.Column="1" Width="60" HorizontalAlignment="Left" Margin="2"/>
+
+        <Label Content="Van rekeningnummer" Grid.Row="4"/>
+        <Controls:NumericUpDown Minimum="0"  Value="{Binding ColumnAccountNumberFrom}"  Grid.Row="4" Grid.Column="1" Width="60" HorizontalAlignment="Left" Margin="2"/>
+
+
+        <Label Content="Naar rekeningnummer" Grid.Row="5"/>
+        <Controls:NumericUpDown Minimum="0"  Value="{Binding ColumnAccountNumberTo}"  Grid.Row="5" Grid.Column="1" Width="60" HorizontalAlignment="Left"  Margin="2"/>
+
+        <Label Content="Hoeveelheid" Grid.Row="6"/>
+        <Controls:NumericUpDown Minimum="0"  Value="{Binding ColumnAmount}"  Grid.Row="6" Grid.Column="1" Width="60" HorizontalAlignment="Left"  Margin="2"/>
+
+        <Label Content="Omschrijving" Grid.Row="7"/>
+        <Controls:NumericUpDown Minimum="0"  Value="{Binding ColumnStatement}"  Grid.Row="7" Grid.Column="1" Width="60" HorizontalAlignment="Left"  Margin="2"/>
+
+        <Label Content="Relatienaam" Grid.Row="8"/>
+        <Controls:NumericUpDown Minimum="0"  Value="{Binding ColumnRelationName}"  Grid.Row="8" Grid.Column="1" Width="60" HorizontalAlignment="Left"  Margin="2"/>
+
+        <Label Content="Bij of Af kolom" Grid.Row="9"/>
+        <Controls:NumericUpDown Minimum="0"  Value="{Binding ColumnAddOrMinus}"  Grid.Row="9" Grid.Column="1" Width="60" HorizontalAlignment="Left"  Margin="2"/>
+
+        <Label Content="Waarde in cell bij 'Bij'" Grid.Row="10"/>
+        <TextBox Grid.Column="1" Grid.Row="10"  Text="{Binding AddText}" Margin="2"/>
+    </Grid>
+</UserControl>

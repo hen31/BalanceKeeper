@@ -1,0 +1,65 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">  
+  <PropertyGroup>  
+    <TargetFrameworks>net5.0-windows</TargetFrameworks>  
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>  
+    <AssemblyName>BalanceKeeper</AssemblyName>  
+    <RootNamespace>BalanceKeeper</RootNamespace>
+    <UseWindowsForms>true</UseWindowsForms>
+    <UseWPF>true</UseWPF>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <ApplicationIcon>square150x150logo_scale_200_XGm_icon.ico</ApplicationIcon>  
+    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>  
+    <OutputType>WinExe</OutputType>  
+    <StartupObject>BalanceKeeper.App</StartupObject>  
+  </PropertyGroup>  
+  <ItemGroup>
+    <None Remove="square150x150logo_scale_200_XGm_icon.ico" />
+    <None Remove="Style\Logo.png" />
+  </ItemGroup>  
+  <ItemGroup>
+    <Resource Include="square150x150logo_scale_200_XGm_icon.ico" />
+    <Resource Include="Style\Logo.png" />
+  </ItemGroup>  
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="ControlzEx" Version="5.0.0" />
+    <PackageReference Include="CredentialManagement" Version="1.0.2" />
+    <PackageReference Include="DeltaCompressionDotNet" Version="2.0.0" />
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.0.2" />
+    <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
+    <PackageReference Include="LoadingIndicators.WPF.Core" Version="1.0.1" />
+    <PackageReference Include="MahApps.Metro" Version="2.4.4" />
+    <PackageReference Include="MahApps.Metro.IconPacks" Version="4.8.0" />
+    <PackageReference Include="MahApps.Metro.SimpleChildWindow" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="6.0.0-preview.1.21102.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.0-preview.1.21102.2" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
+    <PackageReference Include="Mono.Cecil" version="0.11.3" />
+    <PackageReference Include="Newtonsoft.Json" version="13.0.1-beta1" />
+    <PackageReference Include="Remotion.Linq" version="2.2.0" />
+    <PackageReference Include="SharpCompress" version="0.28.1" />
+    <PackageReference Include="SimpleInjector" version="5.3.0-beta2" />
+    <PackageReference Include="Splat" version="10.0.1" />
+    <PackageReference Include="SQLitePCLRaw.bundle_green" version="2.0.4" />
+    <PackageReference Include="SQLitePCLRaw.core" version="2.0.5-pre20210119130047" />
+    <PackageReference Include="SQLitePCLRaw.lib.e_sqlite3.linux" version="1.1.14" />
+    <PackageReference Include="SQLitePCLRaw.lib.e_sqlite3.osx" version="1.1.14" />
+    <PackageReference Include="SQLitePCLRaw.lib.e_sqlite3.v110_xp" version="1.1.14" />
+    <PackageReference Include="SQLitePCLRaw.provider.e_sqlite3.net45" version="1.1.14" />
+  </ItemGroup>  
+  <ItemGroup>
+    <ProjectReference Include="..\BalanceKeeper.Data.Domain\BalanceKeeper.Data.Domain.csproj" />
+    <ProjectReference Include="..\BalanceKeeper.Data.EntityFramework.SQLite\BalanceKeeper.Data.EntityFramework.SQLite.csproj" />
+    <ProjectReference Include="..\BalanceKeeper.Data.EntityFramework\BalanceKeeper.Data.EntityFramework.csproj" />
+    <ProjectReference Include="..\BalanceKeeper.Data.Repositories.Database\BalanceKeeper.Data.Repositories.Database.csproj" />
+    <ProjectReference Include="..\BalanceKeeper.Data.Repositories\BalanceKeeper.Data.Repositories.csproj" />
+    <ProjectReference Include="..\BalanceKeeper.Data\BalanceKeeper.Data.csproj" />
+  </ItemGroup>  
+  <ItemGroup>
+    <None Update="e_sqlite3.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>  

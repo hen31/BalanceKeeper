@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="BalanceKeeper.Views.ChildViews.ImportWizard.ImportedRelationsPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:conv="clr-namespace:BalanceKeeper.Converters"
+             xmlns:local="clr-namespace:BalanceKeeper.Views.ChildViews.ImportWizard"
+             mc:Ignorable="d" 
+             x:Name="ImportedView"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <conv:CategorieLinksToTextConverter x:Key="CategorieLinksToTextConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Label Content="Geimporteerde relaties" HorizontalAlignment="Center" FontWeight="Bold"/>
+        <DataGrid Grid.Row="1"
+                 
+            ItemsSource="{Binding ImportResult.ImportedRelations}"
+                  AutoGenerateColumns="False" SelectedItem="{Binding SelectedItem}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Naam"
+                                      Width="3*"
+                                      Binding="{Binding Name}" CanUserSort="True"/>
+                <DataGridTextColumn Header="Categorieën"
+                                    Width="1*"
+                                Binding="{Binding CategoryLinks, Converter={StaticResource CategorieLinksToTextConverter}}"  CanUserSort="True"/>
+                <DataGridTextColumn Header="Rekeningnummer"
+                                Binding="{Binding AccountNumbers[0].AccountNumber}" CanUserSort="True"/>
+
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                                <Hyperlink Command="{Binding DataContext.EditRelationCommand, ElementName=ImportedView}" CommandParameter="{Binding}">Bewerken</Hyperlink>
+                            </TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button Margin="5" Height="50" Grid.Row="2" Width="250" Command="{Binding NextPageCommand}">
+            <Label Content="Afronden"/>
+        </Button>
+    </Grid>
+</UserControl>

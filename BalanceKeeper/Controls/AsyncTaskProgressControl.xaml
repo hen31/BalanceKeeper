@@ -1,0 +1,88 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                xmlns:loadin="clr-namespace:LoadingIndicators.WPF;assembly=LoadingIndicators.WPF"
+                    xmlns:local="clr-namespace:BalanceKeeper.Controls">
+    <Style TargetType="{x:Type local:AsyncTaskProgressControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:AsyncTaskProgressControl}">
+                    <Grid>
+                        <ContentPresenter Content="{TemplateBinding Content}"
+                                          Margin="{TemplateBinding Padding}"
+                                          IsEnabled="{Binding TaskNotifier.IsCompleted}">
+                            <ContentPresenter.Style>
+                                <Style TargetType="ContentPresenter">
+                                    <Style.Setters>
+                                        <Setter Property="Visibility" Value="Hidden"/>
+                                    </Style.Setters>
+                                    <Style.Triggers>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding TaskNotifier.IsSuccessfullyCompleted, RelativeSource={RelativeSource TemplatedParent}}" Value="True"/>
+                                            </MultiDataTrigger.Conditions>
+                                            <MultiDataTrigger.Setters>
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </MultiDataTrigger.Setters>
+                                        </MultiDataTrigger>
+
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding HideContentWhileExecuting, RelativeSource={RelativeSource TemplatedParent}}" Value="False"/>
+                                            </MultiDataTrigger.Conditions>
+                                            <MultiDataTrigger.Setters>
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </MultiDataTrigger.Setters>
+                                        </MultiDataTrigger>
+
+                                    </Style.Triggers>
+                                </Style>
+                            </ContentPresenter.Style>
+                        </ContentPresenter>
+
+                        <Border MinHeight="75" MinWidth="125"
+                                BorderThickness="2"
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                CornerRadius="5"
+                                BorderBrush="#D8000000"
+                                Background="#7F040404"
+                                Visibility="{Binding TaskNotifier.IsSuccessfullyCompleted, Converter={StaticResource BoolToVisInverted}, RelativeSource={RelativeSource TemplatedParent}}">
+                            <!---->
+                            <Grid HorizontalAlignment="Center" VerticalAlignment="Center" >
+                                  <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                                
+                            <loadin:LoadingIndicator IsActive="True" SpeedRatio="2" Style="{StaticResource LoadingIndicatorArcsStyleKey}" Margin="5"/>
+
+                            <iconPacks:PackIconFontAwesome Foreground="White" Kind="ExclamationSolid" Height="32" Width="32" Margin="5" Visibility="{Binding TaskNotifier.IsFaulted, Converter={StaticResource BoolToVis}, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                
+                                <TextBlock Grid.Column="1" VerticalAlignment="Center" FontSize="18" Margin="2" FontWeight="Bold">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                                            <Style.Setters>
+                                                <Setter Property="Text" Value="{Binding BusyText, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                                <Setter Property="Foreground" Value="White"/>
+                                            </Style.Setters>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding TaskNotifier.IsFaulted, RelativeSource={RelativeSource TemplatedParent}}" Value="True">
+                                                    <Setter Property="Text" Value="{Binding TaskNotifier.ErrorMessage, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                                    <Setter Property="Foreground" Value="Red"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </Grid>
+
+                        </Border>
+                            </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

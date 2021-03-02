@@ -1,0 +1,141 @@
+﻿<Controls:MetroWindow x:Class="BalanceKeeper.Views.LoginView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:local="clr-namespace:BalanceKeeper"
+        xmlns:bkcontrols="clr-namespace:BalanceKeeper.Controls"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        ShowTitleBar="True"
+        ResizeMode="NoResize"
+        ShowCloseButton="True"
+        WindowStartupLocation="CenterScreen"
+        ShowIconOnTitleBar="True"
+        IsCloseButtonEnabled="True"
+        GlowBrush="Black"
+        x:Name="view"
+        mc:Ignorable="d"
+        Title="BalanceKeeper - Login" Height="375" Width="525"
+        Background="{StaticResource MahApps.Brushes.Accent}">
+
+    <Border VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <bkcontrols:AsyncTaskProgressControl TaskNotifier="{Binding LoginTaskNotifier}" BusyText="Bezig met inloggen" Visibility="{Binding IsRegistering, Converter={StaticResource BoolToVisInverted}}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="400"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="125"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Image Grid.ColumnSpan="2" Source="/BalanceKeeper;component/Style/Logo.png"/>
+
+                    <Label Content="Gebruikersnaam" Margin="2" Foreground="White" Grid.Row="1"/>
+                    <TextBox  Margin="2" Grid.Column="1" Grid.Row="1" Text="{Binding EmailAdress, UpdateSourceTrigger=PropertyChanged}"/>
+
+                    <Label Content="Wachtwoord" Grid.Row="2" Margin="2" Foreground="White"/>
+                    <PasswordBox  Margin="2" Grid.Row="2" Grid.Column="1" x:Name="PassBox">
+                        <PasswordBox.InputBindings>
+                            <KeyBinding Command="{Binding LoginCommand}"  CommandParameter="{Binding ElementName=PassBox}" Key="Enter"/>
+                        </PasswordBox.InputBindings>
+                    </PasswordBox>
+                    
+                    <Label Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Content="{Binding ErrorMessage}" Foreground="Red" />
+
+
+                    <Button Grid.Row="6" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="150" Command="{Binding RegisterCommand}" Margin="5">
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource 	MahApps.Styles.Button.Square.Accent}">
+                            </Style>
+                        </Button.Style>
+                        <Label Content="Registeren"  VerticalAlignment="Center" Foreground="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}"/>
+                    </Button>
+                    
+                    <Button Grid.Row="6" HorizontalAlignment="Right" Grid.ColumnSpan="2" Width="150" Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=PassBox}" Margin="5">
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource 	MahApps.Styles.Button.Square.Accent}">
+                                <Setter Property="Background" Value="{StaticResource OkColor}"/>
+                            </Style>
+                        </Button.Style>
+                        <Label Content="Inloggen"  VerticalAlignment="Center" Foreground="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}"/>
+                    </Button>
+                </Grid>
+            </bkcontrols:AsyncTaskProgressControl>
+
+            <bkcontrols:AsyncTaskProgressControl TaskNotifier="{Binding RegisterTaskNotifier}" BusyText="Bezig met registeren" Visibility="{Binding IsRegistering, Converter={StaticResource BoolToVis}}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="400"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="125"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Image Grid.ColumnSpan="2" Source="/BalanceKeeper;component/Style/Logo.png"/>
+
+                    <Label Content="Gebruikersnaam" Margin="2" Foreground="White" Grid.Row="1"/>
+                    <TextBox  Margin="2" Grid.Column="1" Grid.Row="1" Text="{Binding EmailAdress, UpdateSourceTrigger=PropertyChanged}"/>
+
+                    <Label Content="Wachtwoord" Grid.Row="2" Margin="2" Foreground="White"/>
+                    <PasswordBox  Margin="2" Grid.Row="2" Grid.Column="1" x:Name="PassBoxReg1">
+                        <PasswordBox.InputBindings>
+                            <KeyBinding Command="{Binding RegisterCommand}" CommandParameter="{Binding ElementName=view}" Key="Enter"/>
+                        </PasswordBox.InputBindings>
+                    </PasswordBox>
+                    <Label Content="Bevestig" Grid.Row="3" Margin="2" Foreground="White"/>
+                    <PasswordBox  Margin="2" Grid.Row="3" Grid.Column="1" x:Name="PassBoxReg2">
+                        <PasswordBox.InputBindings>
+                            <KeyBinding Command="{Binding RegisterCommand}" CommandParameter="{Binding ElementName=view}" Key="Enter"/>
+                        </PasswordBox.InputBindings>
+                    </PasswordBox>
+
+                    <Label Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Content="{Binding ErrorMessage}" Foreground="Red" />
+                  
+
+                    <Button Grid.Row="7" Grid.ColumnSpan="2" HorizontalAlignment="Center" Width="150" Command="{Binding CancelRegisterCommand}" Margin="5">
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource 	MahApps.Styles.Button.Square.Accent}">
+                            </Style>
+                        </Button.Style>
+                        <Label Content="Inloggen"  VerticalAlignment="Center" Foreground="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}"/>
+                    </Button>
+                    <Button Grid.Row="7" HorizontalAlignment="Right" Grid.ColumnSpan="2" Width="150" Command="{Binding RegisterCommand}" CommandParameter="{Binding ElementName=view}" Margin="5">
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource 	MahApps.Styles.Button.Square.Accent}">
+                                <Setter Property="Background" Value="{StaticResource OkColor}"/>
+                            </Style>
+                        </Button.Style>
+                        <Label Content="Registeren"  VerticalAlignment="Center" Foreground="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}"/>
+                    </Button>
+                </Grid>
+            </bkcontrols:AsyncTaskProgressControl>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="1">
+                <iconPacks:PackIconMaterial Foreground="White" Kind="Copyright" VerticalAlignment="Center"/>
+                <Label Content="Hendrik de Jonge" VerticalAlignment="Center" Foreground="White" Margin="0, 0, 0, 0"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+
+</Controls:MetroWindow>
